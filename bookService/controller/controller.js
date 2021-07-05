@@ -13,8 +13,8 @@ let instance = new Razorpay({
 
 module.exports.bookDetails_post = (req, res) => {
 
-    axios
-        .put(
+
+    axios.put(
             "http://localhost:4001/updateTrainSeat/" + req.body.train_id, { numOfticket: req.body.numOfSeats }
         )
         .then((trains) => {

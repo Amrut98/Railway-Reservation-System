@@ -52,14 +52,14 @@ app.use(
 
 
 //routes
-app.use('/books', routes)
+app.use(routes)
 
 // database connection
 const dbURI = 'mongodb+srv://Amrut1998:Amrut1998@cluster0.y38he.mongodb.net/Reservation?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then((result) => app.listen(4007))
     .catch((err) => console.log(err));
-console.log('Port 1007');
+console.log('Port 4007');
 
 
 

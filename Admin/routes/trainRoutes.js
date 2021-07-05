@@ -143,7 +143,7 @@ router.get('/train/:id', trainsController.trains_getbyId);
 
 
 
-router.post('/train', trainsController.trains_post);
+router.post('/train', isAuthenticated, trainsController.trains_post);
 
 
 /**
@@ -180,7 +180,7 @@ router.post('/train', trainsController.trains_post);
 
 
 
-router.patch('/train/:id', trainsController.trains_update);
+router.patch('/train/:id', isAuthenticated, trainsController.trains_update);
 
 
 
@@ -209,12 +209,12 @@ router.patch('/train/:id', trainsController.trains_update);
 
 
 
-router.delete('/train/:id', trainsController.trains_delete);
+router.delete('/train/:id', isAuthenticated, trainsController.trains_delete);
 
 
 
 
-router.put('/updateTrainSeat/:id', trainsController.UpdateTrainSeat);
+router.put('/updateTrainSeat/:id', isAuthenticated, trainsController.UpdateTrainSeat);
 
 
 

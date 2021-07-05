@@ -35,7 +35,7 @@ module.exports.trains_post = async(req, res) => {
             res.status(200).send(result);
         })
         .catch((err) => {
-            res.status(400).send(err);
+            res.status(400).json({ err: err.message });
             console.log(err);
         })
 }
@@ -62,7 +62,7 @@ module.exports.trains_delete = (req, res) => {
     const id = req.params.id;
     trains.findByIdAndDelete(id)
         .then((result) => {
-            res.status(200).send("Train deleted");
+            res.status(200).json({ message: "Train deleted" });
         })
         .catch((err) => {
             res.status(400).json({ message: "Train not deleted" });
@@ -78,7 +78,6 @@ module.exports.UpdateTrainSeat = (req, res) => {
     trains.findByIdAndUpdate({ _id: req.params.id }, { $inc: { numOfticket: -req.body.numOfticket } })
         .then(
             data => {
-
                 res.send("succ")
             }).catch(err => {
             res.send("error")

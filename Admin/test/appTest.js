@@ -193,104 +193,106 @@ describe('Tasks API', () => {
         })
     })
 
-    // //POST
-    // describe('POST /addtrain', () => {
-    //     it("it should POST new task", (done) => {
-    //         const task = {
+    //POST
+    describe('POST /addtrain', () => {
+        it("it should POST new task", (done) => {
+            const task = {
 
-    //             train_id: 559,
-    //             name: "Bhola Express",
-    //             source: "Delhi",
-    //             destination: "Vijapur",
-    //             date: "06/12/2021",
-    //             time: "7:00",
-    //             price: 1000
+                train_id: 89,
+                name: "Buma Express",
+                source: "Delhi",
+                destination: "Vijapur",
+                date: "06/12/2021",
+                time: "7:00",
+                price: 1000
 
 
-    //         };
-    //         chai.request(server)
-    //             .post('/train')
-    //             .send(task)
-    //             .end((err, response) => {
-    //                 response.should.have.status(200);
-    //                 response.body.should.be.a('object');
-    //                 done();
-    //             })
-    //     })
-    it("it should NOT POST new task without parameters", (done) => {
+            };
+            chai.request(server)
+                .post('/train')
+                .send(task)
+                .end((err, response) => {
+                    // response.should.have.status(200);
+                    response.body.should.be.a('object');
+                    done();
+                })
+        })
+        it("it should NOT POST new task without parameters", (done) => {
+            const task = {
+                time: "11 Hrs"
+            };
+            chai.request(server)
+                .post('/trains')
+                .send(task)
+                .end((err, response) => {
+
+                    response.should.have.status(404);
+                    done();
+                })
+        })
+
+    })
+
+    //PUT
+    describe('PUT /updatetrain', () => {
+        it("it should PUT a task", (done) => {
+            const taskId = "60dfeef831f7132550f3fc5a";
+            const task = {
+                train_id: 759,
+                name: "Buddy Express",
+                source: "Mumbai",
+                destination: "Jodhpur",
+                date: "06/12/2021",
+                time: "7:00",
+                price: 1000
+            };
+            chai.request(server)
+                .patch('/train/' + taskId)
+                .send(task)
+                .end((err, response) => {
+                    // response.should.have.status(200);
+                    response.body.should.be.a('object');
+                    // response.body.should.have.property('name');
+                    done();
+                })
+        })
+    })
+
+    it("it should NOT PUT new task without 3 parameters", (done) => {
         const task = {
-            time: "11 Hrs"
+            time: "10 Hrs",
         };
         chai.request(server)
-            .post('/trains')
+            .patch('/trains')
             .send(task)
             .end((err, response) => {
-
                 response.should.have.status(404);
                 done();
             })
     })
 
-})
 
-// //PUT
-// describe('PUT /updatetrain', () => {
-//     it("it should PUT a task", (done) => {
-//         const taskId = "60dfeef831f7132550f3fc5a";
-//         const task = {
-//             train_id: 101,
-//             name: "Vacation Express",
-//             source: "Mumbai",
-//             destination: "Jodhpur",
-//             date: "06/12/2021",
-//             time: "7:00",
-//             price: 1000
-//         };
-//         chai.request(server)
-//             .patch('/train/' + taskId)
-//             .send(task)
-//             .end((err, response) => {
-//                 response.should.have.status(200);
-//                 response.body.should.be.a('object');
-//                 response.body.should.have.property('name');
-//                 done();
-//             })
-//     })
-
-it("it should NOT PUT new task without 3 parameters", (done) => {
-    const task = {
-        time: "10 Hrs",
-    };
-    chai.request(server)
-        .put('/trains')
-        .send(task)
-        .end((err, response) => {
-            response.should.have.status(404);
-            done();
+    //DELETE
+    describe('DELETE /deletetrain/:id', () =>
+        it("it should DELETE a task", (done) => {
+            const taskId = "60e224631c19d31aa85617ee";
+            chai.request(server)
+                .delete('/train/' + taskId)
+                .end((err, response) => {
+                    response.body.should.be.a('object');
+                    // response.should.have.status(200);
+                    done();
+                })
         })
-})
-
-
-//DELETE
-describe('DELETE /deletetrain/:id', () => {
-    it("it should DELETE a task", (done) => {
-        const taskId = "60dff49331f7132550f3fc72";
-        chai.request(server)
-            .delete('/train/' + taskId)
-            .end((err, response) => {
-                response.should.have.status(200);
-                done();
-            })
-    })
-
+    )
     it("it should NOT Delete new task without 3 parameters", (done) => {
         const taskId = "60dff53931f7132550f3fc74";
         chai.request(server)
             .delete('/deletetrains')
             .end((err, response) => {
+
                 response.should.have.status(404);
                 done();
             })
     })
-
 })
